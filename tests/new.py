@@ -76,3 +76,5 @@ if __name__ == "__main__":
     )
 
     print("Processed dataset saved successfully!")
+    print("Shape of Processed Dataset:", df.shape)
+    
