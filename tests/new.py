@@ -77,4 +77,52 @@ if __name__ == "__main__":
 
     print("Processed dataset saved successfully!")
     print("Shape of Processed Dataset:", df.shape)
-    
+import networkx as nx
+import matplotlib.pyplot as plt
+
+# Create supply chain graph
+G = nx.DiGraph()
+
+# Add suppliers and companies
+G.add_edges_from([
+    ("Supplier A", "Factory"),
+    ("Supplier B", "Factory"),
+    ("Factory", "Warehouse"),
+    ("Warehouse", "Retailer"),
+    ("Retailer", "Customer")
+])
+
+# Calculate node risk
+risk_scores = {
+    "Supplier A": 0.8,
+    "Supplier B": 0.3,
+    "Factory": 0.5,
+    "Warehouse": 0.2,
+    "Retailer": 0.1,
+    "Customer": 0.0
+}
+
+# Display risk scores
+print("ATMO GRAPH - SUPPLY CHAIN RISK ANALYSIS")
+print("-" * 45)
+
+for node, risk in risk_scores.items():
+    print(f"{node}: {risk * 100:.0f}% Risk")
+
+# Visualize supply chain
+plt.figure(figsize=(10, 6))
+
+pos = nx.spring_layout(G, seed=42)
+
+nx.draw(
+    G,
+    pos,
+    with_labels=True,
+    node_color="skyblue",
+    node_size=2500,
+    font_size=9,
+    arrows=True
+)
+
+plt.title("AtmoGraph - Supply Chain Network")
+plt.show()
